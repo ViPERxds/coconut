@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Свадебное приглашение</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Great+Vibes&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Lora',Georgia,'Times New Roman',serif;
+    background: linear-gradient(180deg,#f7f3ef 0%, #f3eee8 50%, #f7f3ef 100%);
+    color:#4d3f34;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+}
+
+/* ================= SECTIONS ================= */
+
+section{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:90px 20px;
+}
+
+section.invite{
+    padding-top:44px;
+    padding-bottom:90px;
+}
+
+/* ================= HERO: сетка — слева имена + под ними остальное; справа фото на всю высоту (ПК) ================= */
+
+section.hero{
+    padding:clamp(16px,2vw,28px);
+    display:block;
+    min-height:100vh;
+    min-height:100dvh;
+}
+
+.hero-wrap{
+    display:grid;
+    width:100%;
+    max-width:1240px;
+    margin:0 auto;
+    min-height:calc(100vh - clamp(32px,4vw,56px));
+    min-height:calc(100dvh - clamp(32px,4vw,56px));
+    grid-template-columns:1fr min(38vw,420px);
+    grid-template-rows:auto 1fr;
+    grid-template-areas:
+        "names photo"
+        "below photo";
+    align-items:stretch;
+    overflow:hidden;
+    border-radius:32px;
+    box-shadow:0 20px 60px rgba(77,63,52,0.08);
+}
+
+/* дата, призыв, таймер — под именами слева на ПК; на телефоне — строка на всю ширину по центру */
+.hero-below{
+    grid-area:below;
+    padding:0 clamp(20px,4vw,48px) clamp(40px,5vw,64px);
+    text-align:center;
+    background: linear-gradient(180deg,#f7f3ef 0%, #f3eee8 50%, #f7f3ef 100%);
+}
+
+.hero-below .date{
+    margin-bottom:20px;
+}
+
+.hero-below .wait{
+    margin-bottom:35px;
+}
+
+.hero-photo{
+    grid-area:photo;
+    position:relative;
+    min-width:260px;
+    min-height:320px;
+    overflow:hidden;
+}
+
+.hero-photo img{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center 22%;
+    display:block;
+}
+
+/* ================= GENERAL ================= */
+
+.container{
+    width:100%;
+    max-width:1000px;
+    text-align:center;
+}
+
+.fade{
+    animation:fadeUp 1.2s ease both;
+}
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* ================= HERO TEXT ================= */
+
+.names{
+    grid-area:names;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:clamp(32px,5vw,72px) clamp(20px,4vw,48px);
+    background: linear-gradient(180deg,#f7f3ef 0%, #f3eee8 50%, #f7f3ef 100%);
+    margin-bottom:0;
+    max-width:100%;
+}
+
+.names-line{
+    display:block;
+    font-family:'Cormorant Garamond', serif;
+    font-size:76px;
+    line-height:0.95;
+    color:#4d3f34;
+    font-weight:400;
+}
+
+.names-amp{
+    display:inline-block;
+    margin-left:4px;
+    font-family:'Great Vibes', cursive;
+    font-size:0.86em;
+    color:#8b7663;
+    transform:translateY(2px);
+}
+
+.hero-mobile-date{
+    display:none;
+}
+
+.date{
+    font-family:'Lora',Georgia,serif;
+    font-size:28px;
+    letter-spacing:0.12em;
+    color:#7a6553;
+    margin-bottom:20px;
+    font-weight:500;
+}
+
+.wait{
+    font-family:'Great Vibes', cursive;
+    font-size:72px;
+    color:#6b5a4a;
+    margin-bottom:35px;
+    line-height:1.15;
+}
+
+/* TIMER */
+
+.timer{
+    display:flex;
+    justify-content:center;
+    align-items:stretch;
+    gap:18px;
+    flex-wrap:nowrap;
+}
+
+.timer-box{
+    width:95px;
+    padding:18px 10px;
+    background:rgba(255,255,255,0.55);
+    border:1px solid rgba(122,101,83,0.18);
+    border-radius:18px;
+    backdrop-filter:blur(10px);
+    box-shadow:0 8px 24px rgba(77,63,52,0.06);
+}
+
+.timer-box span{
+    display:block;
+    font-family:'Lora',Georgia,serif;
+    font-size:34px;
+    font-weight:600;
+    color:#4d3f34;
+}
+
+.timer-box small{
+    font-family:'Lora',Georgia,serif;
+    font-size:12px;
+    font-weight:500;
+    letter-spacing:0.04em;
+    color:#7a6553;
+}
+
+/* ================= SECTIONS CONTENT ================= */
+
+.section-title{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:25px;
+    margin-bottom:35px;
+}
+
+.section-title h2{
+    font-family:'Lora',Georgia,serif;
+    font-size:68px;
+    font-weight:500;
+    letter-spacing:0.02em;
+    color:#5d4b3f;
+}
+
+.card{
+    max-width:800px;
+    margin:0 auto;
+    padding:55px;
+    background:rgba(255,255,255,0.38);
+    border:1px solid rgba(122,101,83,0.10);
+    border-radius:28px;
+    backdrop-filter:blur(12px);
+    box-shadow:0 20px 50px rgba(0,0,0,0.06);
+}
+
+.card p{
+    font-family:'Lora',Georgia,serif;
+    font-size:34px;
+    font-weight:400;
+    line-height:1.65;
+    color:#5a4638;
+    margin-bottom:18px;
+}
+
+/* таймер в блоке «Дорогой гость» — всегда одна строка */
+.timer-invite{
+    margin-top:28px;
+    justify-content:center;
+    width:100%;
+    max-width:100%;
+    gap:clamp(6px,2vw,14px);
+    flex-wrap:nowrap;
+}
+.timer-invite .timer-box{
+    flex:1 1 0;
+    min-width:0;
+    width:auto;
+    max-width:none;
+}
+
+/* FINAL */
+
+.final-title{
+    font-family:'Great Vibes', cursive;
+    font-size:84px;
+    color:#7a6553;
+    margin-bottom:30px;
+}
+
+.palette-text{
+    max-width:800px;
+    margin:0 auto 35px;
+    font-family:'Lora',Georgia,serif;
+    font-size:34px;
+    font-weight:400;
+    line-height:1.65;
+    color:#5a4638;
+}
+
+.palette{
+    display:flex;
+    justify-content:center;
+    gap:25px;
+    flex-wrap:wrap;
+}
+
+.circle{
+    width:75px;
+    height:75px;
+    border-radius:50%;
+    box-shadow:0 8px 20px rgba(0,0,0,0.08);
+}
+
+/* MOBILE: фото крупно, дата и имена поверх фото, таймер ниже */
+
+@media(max-width:768px){
+    section.invite{
+        padding-top:28px;
+        min-height:auto;
+    }
+    section.hero{
+        display:block;
+        min-height:auto;
+        padding:14px 12px 6px;
+    }
+    .hero-wrap{
+        width:min(100%,390px);
+        margin:0 auto;
+        min-height:auto;
+        grid-template-columns:1fr;
+        grid-template-rows:auto;
+        grid-template-areas:"photo";
+        border-radius:0;
+        box-shadow:none;
+        background:none;
+        gap:0;
+    }
+    .names{
+        grid-area:photo;
+        z-index:3;
+        align-self:end;
+        justify-self:stretch;
+        flex-direction:column;
+        flex-wrap:nowrap;
+        align-items:center;
+        justify-content:flex-end;
+        text-align:center;
+        padding:0 20px 28px;
+        min-height:0;
+        width:100%;
+        box-sizing:border-box;
+        background:none;
+        pointer-events:none;
+    }
+    .names-line{
+        display:block;
+        font-size:clamp(28px,7.6vw,38px);
+        line-height:1.12;
+        white-space:normal;
+        color:#fffdf9;
+        font-weight:500;
+        text-shadow:0 2px 14px rgba(0,0,0,0.55), 0 1px 3px rgba(0,0,0,0.45);
+    }
+    .names-line + .names-line::before{
+        content:none;
+    }
+    .names-amp{
+        margin:0 4px;
+        font-family:'Great Vibes', cursive;
+        font-size:0.95em;
+        color:#f5ebe0;
+        transform:translateY(1px);
+        text-shadow:0 2px 12px rgba(0,0,0,0.45);
+    }
+    .hero-mobile-date{
+        display:block;
+        width:100%;
+        margin-top:10px;
+        font-family:'Lora',Georgia,serif;
+        font-size:clamp(17px,4.2vw,22px);
+        letter-spacing:0.14em;
+        color:rgba(255,255,255,0.92);
+        font-weight:500;
+        text-shadow:0 2px 10px rgba(0,0,0,0.5);
+    }
+    .hero-below{
+        display:none;
+    }
+    .hero-photo{
+        grid-area:photo;
+        z-index:0;
+        min-width:0;
+        min-height:min(68vh,590px);
+        aspect-ratio:10 / 13.1;
+        margin:0;
+        border-radius:26px;
+        background:#ede7e0;
+        position:relative;
+    }
+    .hero-photo img{
+        object-position:center 18%;
+        transform:scale(1.04);
+    }
+    .hero-photo::before{
+        content:"";
+        position:absolute;
+        inset:0;
+        background:rgba(0,0,0,0.32);
+        z-index:1;
+        pointer-events:none;
+    }
+    .hero-photo::after{
+        content:"";
+        position:absolute;
+        inset:0;
+        z-index:1;
+        background:linear-gradient(
+            180deg,
+            rgba(0,0,0,0) 30%,
+            rgba(0,0,0,0.42) 72%,
+            rgba(0,0,0,0.62) 100%
+        );
+        pointer-events:none;
+    }
+    .section-title h2{font-size:42px;}
+    .card{padding:30px;}
+    .card p{font-size:24px;}
+    .final-title{font-size:56px;}
+    .timer-invite{
+        margin-top:22px;
+        gap:6px;
+    }
+    .timer-invite .timer-box{
+        padding:9px 4px 10px;
+    }
+    .timer-invite .timer-box span{font-size:clamp(15px,4vw,22px);}
+    .timer-invite .timer-box small{font-size:9px;letter-spacing:0.02em;}
+}
+
+@media(max-width:380px){
+    section.hero{
+        padding:12px 10px 4px;
+    }
+    .hero-wrap{
+        width:100%;
+    }
+    .names{
+        padding:0 16px 24px;
+    }
+    .names-line{
+        font-size:clamp(26px,8.2vw,32px);
+    }
+    .hero-photo{
+        min-height:min(64vh,520px);
+        border-radius:22px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HERO: ПК — слева имена, под ними дата/таймер; справа фото. Телефон — сверху: только имена | фото; ниже всё по центру -->
+<section class="hero">
+<div class="hero-wrap fade">
+    <div class="names">
+        <span class="names-line">Роман <span class="names-amp">&</span> Светлана</span>
+        <span class="hero-mobile-date">27 июля 2026</span>
+    </div>
+    <div class="hero-photo">
+        <img src="hero.png" alt="Роман и Светлана" decoding="async" fetchpriority="high">
+    </div>
+    <div class="hero-below">
+        <div class="date">27 июля 2026</div>
+    </div>
+</div>
+</section>
+
+<!-- INVITE -->
+<section class="invite">
+<div class="container fade">
+    <div class="section-title">
+        <h2>Дорогой гость!</h2>
+    </div>
+
+    <div class="card">
+        <p>Мы рады сообщить Вам, что 27.07.2026 состоится самое главное торжество в нашей жизни — день нашей свадьбы!</p>
+        <p>Приглашаем Вас разделить с нами радость этого незабываемого дня.</p>
+    </div>
+
+    <div class="timer timer-invite" id="timer"></div>
+</div>
+</section>
+
+<!-- NOTE -->
+<section>
+<div class="container fade">
+    <div class="section-title">
+        <h2>Примечание</h2>
+    </div>
+
+    <div class="card">
+        <p>Мы мечтаем разделить с вами этот особенный вечер в атмосфере уюта и взрослого праздника.</p>
+        <p>Торжество будет проходить без детей. Благодарим за понимание.</p>
+    </div>
+</div>
+</section>
+
+<!-- CONFIRM -->
+<section>
+<div class="container fade">
+    <div class="section-title">
+        <h2>Подтверждение</h2>
+    </div>
+
+    <div class="card">
+        <p>Пожалуйста подтвердите свое присутствие до 01.06.2026</p>
+    </div>
+</div>
+</section>
+
+<!-- FINAL -->
+<section>
+<div class="container fade">
+
+    <div class="final-title">Ждём Вас!</div>
+
+    <div class="palette-text">
+        Для нас самое главное — Ваше присутствие.<br>
+        Но мы будем признательны за соблюдение цветовой гаммы.
+    </div>
+
+    <div class="palette">
+        <div class="circle" style="background:#F7E7CE"></div>
+        <div class="circle" style="background:#CCCBB1"></div>
+        <div class="circle" style="background:#7A6553"></div>
+        <div class="circle" style="background:#4D3F34"></div>
+    </div>
+
+</div>
+</section>
+
+<script>
+const weddingDate = new Date("2026-07-27T16:30:00").getTime();
+const timer = document.getElementById("timer");
+
+function updateTimer(){
+    const now = new Date().getTime();
+    const diff = weddingDate - now;
+
+    const d = Math.floor(diff/(1000*60*60*24));
+    const h = Math.floor((diff/(1000*60*60))%24);
+    const m = Math.floor((diff/(1000*60))%60);
+    const s = Math.floor((diff/1000)%60);
+
+    timer.innerHTML = `
+        <div class="timer-box"><span>${d}</span><small>дней</small></div>
+        <div class="timer-box"><span>${h}</span><small>часов</small></div>
+        <div class="timer-box"><span>${m}</span><small>минут</small></div>
+        <div class="timer-box"><span>${s}</span><small>секунд</small></div>
+    `;
+}
+
+updateTimer();
+setInterval(updateTimer,1000);
+</script>
+
+</body>
+</html>

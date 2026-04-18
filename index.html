@@ -276,6 +276,39 @@ section.hero{
     text-align:center;
 }
 
+.schedule{
+    margin-top:20px;
+}
+.schedule-title{
+    margin:0 0 14px;
+    font-family:'Cormorant Garamond',serif;
+    font-weight:600;
+    font-size:30px;
+    letter-spacing:0.02em;
+    color:#5a4638;
+    text-align:center;
+}
+.schedule-list{
+    display:grid;
+    gap:10px;
+    max-width:520px;
+    margin:0 auto;
+}
+.schedule-item{
+    display:grid;
+    grid-template-columns:86px 1fr;
+    align-items:baseline;
+    column-gap:14px;
+    font-size:26px;
+    line-height:1.35;
+    color:#5a4638;
+}
+.schedule-time{
+    font-weight:600;
+    text-align:left;
+    color:#7a6553;
+}
+
 /* таймер в блоке «Дорогой гость» — всегда одна строка */
 .timer-invite{
     margin-top:0;
@@ -520,6 +553,8 @@ section.hero{
         margin-bottom:12px;
         font-size:clamp(18px,4vw,24px);
     }
+    .schedule-title{font-size:26px;}
+    .schedule-item{font-size:22px;column-gap:12px;grid-template-columns:78px 1fr;}
     .timer-invite{
         gap:6px;
     }
@@ -593,6 +628,15 @@ section.hero{
 
     <p class="timer-intro">До торжества осталось</p>
     <div class="timer timer-invite" id="timer"></div>
+
+    <div class="card schedule">
+        <div class="schedule-title">Свадебное расписание</div>
+        <div class="schedule-list">
+            <div class="schedule-item"><span class="schedule-time">16:30</span><span>Фуршет</span></div>
+            <div class="schedule-item"><span class="schedule-time">17:00</span><span>Свадебная церемония</span></div>
+            <div class="schedule-item"><span class="schedule-time">17:45</span><span>Праздничный банкет</span></div>
+        </div>
+    </div>
 </div>
 </section>
 
